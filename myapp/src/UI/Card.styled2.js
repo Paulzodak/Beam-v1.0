@@ -1,0 +1,27 @@
+import styled from "styled-components";
+export const CardInline = styled.p`
+  float: ${(props) => props.float};
+  min-width: ${(props) => props.mwidth};
+  grid-template-columns: ${(props) => props.gridC};
+  grid-template-rows: ${(props) => props.gridR};
+  font-family: ${(props) => props.font};
+  font-size: ${(props) => props.fs};
+  background-color: ${(props) => props.bg};
+  color: ${(props) => props.cl};
+  margin: ${(props) => props.mg};
+  padding: ${(props) => props.pd};
+  border: ${(props) => props.bd};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  transition: ${(props) => props.tr};
+  position: ${(props) => props.ps};
+  top: ${(props) => props.pstp};
+  right: ${(props) => props.psrt};
+  bottom: ${(props) => props.psbt};
+  left: ${(props) => props.pslf};
+  display: ${(props) => props.dp};
+  -webkit-transform: rotate(${(props) => props.rdeg});
+  -moz-transform: rotate(${(props) => props.rdeg});
+  -o-transform: rotate(${(props) => props.rdeg});
+  transform: rotate(${(props) => props.rdeg});
+`;

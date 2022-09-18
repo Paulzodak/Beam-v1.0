@@ -1,0 +1,13 @@
+.loginCircle1,
+.loginCircle2,
+.loginCircle3 {
+  background-color: #505c8c;
+}
+.loginCircle1 {
+  position: absolute;
+  top: 11rem;
+  left: -4rem;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 100%;
+}
