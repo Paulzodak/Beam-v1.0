@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActiveReducer } from "../../redux/calender";
 import Menu from "./MenuBar/Menu";
 import Filter from "./Filter/Filter";
+import ToDoList from "./ToDos/ToDoList";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const HomePage = () => {
       <Menu />
       <Calender />
       <Filter />
+      <ToDoList />
     </Card>
   );
 };

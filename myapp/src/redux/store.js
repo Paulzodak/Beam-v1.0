@@ -4,6 +4,7 @@ import counterReducer from "./counter";
 import formReducer from "./form";
 import styleReducer from "./styles";
 import calenderReducer from "./calender";
+import FilterStates from "./FilterStates";
 
 export default configureStore({
   reducer: {
@@ -11,5 +12,6 @@ export default configureStore({
     form: formReducer,
     style: styleReducer,
     calender: calenderReducer,
+    FilterStates: FilterStates,
   },
 });
