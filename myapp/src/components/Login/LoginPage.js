@@ -51,8 +51,8 @@ const LoginPage = () => {
           pstp={"0rem"}
           // mg={" 19rem 0 0 0"}
           width={"100%"}
-          bg={styles.colors.darkBlue}
-          cl={styles.colors.mainWhite}
+          // bg={styles.colors.darkBlue}
+          // cl={styles.colors.mainWhite}
         ></Card>
         <Form />
         <Button

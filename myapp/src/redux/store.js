@@ -5,6 +5,8 @@ import formReducer from "./form";
 import styleReducer from "./styles";
 import calenderReducer from "./calender";
 import FilterStates from "./FilterStates";
+import addTodoForm from "./addTodoForm";
+import Todos from "./Todos";
 
 export default configureStore({
   reducer: {
@@ -13,5 +15,7 @@ export default configureStore({
     style: styleReducer,
     calender: calenderReducer,
     FilterStates: FilterStates,
+    addTodoForm: addTodoForm,
+    Todos: Todos,
   },
 });

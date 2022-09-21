@@ -1,7 +1,11 @@
 import styled from "styled-components";
-export const Button = styled.button`
+export const SelectInput = styled.select`
+  justify-content: ${(props) => props.gridjc};
+  backdrop-filter: ${(props) => props.bdft};
   float: ${(props) => props.float};
-  border-radius: ${(props) => props.br};
+  line-height: ${(props) => props.lh};
+  box-shadow: ${(props) => props.bs};
+  border-bottom: ${(props) => props.bdbm};
   grid-template-columns: ${(props) => props.gridC};
   grid-template-rows: ${(props) => props.gridR};
   font-family: ${(props) => props.font};
@@ -10,6 +14,7 @@ export const Button = styled.button`
   color: ${(props) => props.cl};
   margin: ${(props) => props.mg};
   padding: ${(props) => props.pd};
+  vertical-align: ${(props) => props.va};
   border: ${(props) => props.bd};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
@@ -18,6 +23,7 @@ export const Button = styled.button`
   overflow-y: ${(props) => props.ovfy};
   overflow-x: ${(props) => props.ovfx};
   top: ${(props) => props.pstp};
+  border-radius: ${(props) => props.br};
   right: ${(props) => props.psrt};
   bottom: ${(props) => props.psbt};
   left: ${(props) => props.pslf};
@@ -29,12 +35,26 @@ export const Button = styled.button`
   transform: rotate(${(props) => props.rdeg});
   box-sizing: border-box;
   z-index: ${(props) => props.zindex};
+  border-top: ${(props) => props.bdtp};
+  border-bottom: ${(props) => props.bdbt};
+  border-right: ${(props) => props.bdrt};
+  border-left: ${(props) => props.bdlt};
   &:hover {
     color: ${(props) => props.hvcl};
     background-color: ${(props) => props.hvbg};
     font-size: ${(props) => props.hvfs};
-    border: ${(props) => props.hvbd};
     height: ${(props) => props.hvheight};
     width: ${(props) => props.hvwidth};
+  }
+  &:focus {
+    color: ${(props) => props.hvcl};
+    background-color: ${(props) => props.fhvbg};
+    font-size: ${(props) => props.fhvfs};
+    height: ${(props) => props.fhvheight};
+    width: ${(props) => props.fhvwidth};
+    border-top: ${(props) => props.fbdtp};
+    border-bottom: ${(props) => props.fbdbt};
+    border-right: ${(props) => props.fbdrt};
+    border-left: ${(props) => props.fbdlt};
   }
 `;

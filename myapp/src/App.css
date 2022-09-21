@@ -14,3 +14,23 @@
 .fade-exit-active {
   transition: opacity 500ms;
 }
+.fadec-enter {
+  opacity: 0;
+  /* height: 2rem; */
+  /* width: 50%; */
+}
+.fadec-exit {
+  opacity: 0.5;
+  /* height: 2rem; */
+  /* width: 50%; */
+}
+.fadec-enter-active {
+  opacity: 1;
+  /* height: 10rem; */
+  /* width: 100%; */
+}
+.fadec-exit-active {
+  opacity: 0;
+  /* height: 10rem; */
+  /* width: 100%; */
+}

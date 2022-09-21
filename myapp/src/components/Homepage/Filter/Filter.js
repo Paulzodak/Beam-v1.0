@@ -5,17 +5,21 @@ import { setActiveReducer } from "../../../redux/FilterStates";
 import { setAllReducer } from "../../../redux/FilterStates";
 import { setCompletedReducer } from "../../../redux/FilterStates";
 import { useDispatch } from "react-redux";
+import { setDumReducer } from "../../../redux/calender";
 
 const Filter = () => {
   const dispatch = useDispatch();
   const allHandler = () => {
     dispatch(setAllReducer());
+    dispatch(setDumReducer());
   };
   const activeHandler = () => {
     dispatch(setActiveReducer());
+    dispatch(setDumReducer());
   };
   const completedHandler = () => {
     dispatch(setCompletedReducer());
+    dispatch(setDumReducer());
   };
 
   return (

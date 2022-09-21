@@ -1,0 +1,16 @@
+.fadeb-enter {
+  opacity: 0;
+}
+.fadeb-exit {
+  opacity: 1;
+}
+.fadeb-enter-active {
+  opacity: 1;
+}
+.fadeb-exit-active {
+  opacity: 0;
+}
+.fadeb-enter-active,
+.fadeb-exit-active {
+  transition: opacity 500ms;
+}
