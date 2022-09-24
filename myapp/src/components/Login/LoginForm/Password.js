@@ -28,22 +28,22 @@ const Password = () => {
   return (
     <>
       <Input
-        // type="password"
+        type="password"
         height={"2rem"}
         placeholder={"PASSWORD"}
         mg={"2rem 2rem 0 2rem"}
         width={"14rem"}
         bd={"none"}
         br={"5px"}
-        bdlt={
+        // bdlt={
+        //   passwordIsValid
+        //     ? `5px solid ${styles.colors.darkBlue}`
+        //     : `5px solid red`
+        // }
+        bdbt={
           passwordIsValid
-            ? `5px solid ${styles.colors.darkBlue}`
-            : `5px solid red`
-        }
-        bdrt={
-          passwordIsValid
-            ? `5px solid ${styles.colors.darkBlue}`
-            : `5px solid red`
+            ? `2px solid ${styles.colors.darkBlue}`
+            : `2px solid red`
         }
         onChange={passwordHandler}
       />

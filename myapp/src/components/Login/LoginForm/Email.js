@@ -38,16 +38,16 @@ const Email = () => {
     <>
       <Input
         height={"2rem"}
-        mg={"2rem 2rem 0 2rem"}
+        mg={"1rem 2rem 0 2rem"}
         width={"14rem"}
         placeholder={"EMAIL"}
         bd={"none"}
         br={"5px"}
-        bdlt={
-          emailIsValid ? `5px solid ${styles.colors.darkBlue}` : `5px solid red`
-        }
-        bdrt={
-          emailIsValid ? `5px solid ${styles.colors.darkBlue}` : `5px solid red`
+        // bdlt={
+        //   emailIsValid ? `5px solid ${styles.colors.darkBlue}` : `5px solid red`
+        // }
+        bdbt={
+          emailIsValid ? `2px solid ${styles.colors.darkBlue}` : `2px solid red`
         }
         onChange={emailHandler}
       />

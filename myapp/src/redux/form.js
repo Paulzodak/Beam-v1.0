@@ -5,6 +5,7 @@ export const formSlice = createSlice({
   initialState: {
     email: "",
     password: "",
+    addTodoIsValid: false,
     emailIsValid: true,
     passwordIsValid: true,
     formIsValid: false,
@@ -16,6 +17,7 @@ export const formSlice = createSlice({
     passwordReducer: (state, action) => {
       state.password = action.payload.password;
     },
+
     emailIsValidReducer: (state, action) => {
       state.emailIsValid = action.payload.emailIsValid;
     },

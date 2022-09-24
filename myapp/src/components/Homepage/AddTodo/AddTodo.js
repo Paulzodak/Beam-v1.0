@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "../../../UI/Card.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../UI/Button.styled";
@@ -10,6 +10,9 @@ import { setTodoReducer } from "../../../redux/Todos";
 import closeIcon from "../../../Images/closeIcon.svg";
 import { ImageCard } from "../../../UI/ImageCard.styled";
 import { setShowAddTodoReducer } from "../../../redux/addTodoForm";
+import { setFormIsValid } from "../../../redux/addTodoForm";
+import { setNoteInputReducer } from "../../../redux/addTodoForm";
+import { setTaskInputReducer } from "../../../redux/addTodoForm";
 const AddTodo = () => {
   const styles = useSelector((state) => state.style);
   const calender = useSelector((state) => state.calender);
@@ -23,19 +26,34 @@ const AddTodo = () => {
   const currenthour =
     hour > 12 && hour < 24 ? hour - 12 : hour && hour === 24 ? 0 : hour;
   console.log(currenthour);
+  const taskInput = useSelector((state) => state.addTodoForm.taskInput);
+  const noteInput = useSelector((state) => state.addTodoForm.noteInput);
+  const formIsValid = useSelector((state) => state.addTodoForm.formIsValid);
+
+  const [bgColor, setBgColor] = useState(styles.colors.darkBlue);
 
   const formOnSubmit = () => {
-    console.log(calender.currentDay);
-    console.log(inputs);
-    console.log(prevTodos);
-    const newTodo = {
-      time: `${currenthour}:${min}${hour < 12 ? "AM" : "PM"}`,
-      header: inputs.taskInput,
-      details: inputs.noteInput,
-      done: false,
-      day: calender.currentDay,
-    };
-    dispatch(setTodoReducer({ newTodo: newTodo }));
+    console.log(taskInput);
+    console.log(noteInput);
+    if (taskInput.length >= 2 && noteInput.length >= 5) {
+      setBgColor(styles.colors.darkBlue);
+      dispatch(setFormIsValid({ formIsValid: true }));
+      console.log(calender.currentDay);
+      console.log(inputs);
+      console.log(prevTodos);
+      const newTodo = {
+        time: `${currenthour}:${min}${hour < 12 ? "AM" : "PM"}`,
+        header: inputs.taskInput,
+        details: inputs.noteInput,
+        done: false,
+        day: calender.currentDay,
+      };
+      dispatch(setTodoReducer({ newTodo: newTodo }));
+      dispatch(setTaskInputReducer({ taskInput: "" }));
+      dispatch(setNoteInputReducer({ noteInput: "" }));
+    } else {
+      setBgColor("red");
+    }
   };
   const closeHandler = () => {
     dispatch(setShowAddTodoReducer());
@@ -56,8 +74,8 @@ const AddTodo = () => {
         // bd={"1px solid red"}
       >
         <ImageCard
-          height={"3rem"}
-          width={"3rem"}
+          height={"2rem"}
+          width={"2rem"}
           float={"right"}
           mg={"1rem 1rem"}
           src={closeIcon}
@@ -82,7 +100,7 @@ const AddTodo = () => {
           ps={"relative"}
           pstp={"2rem"}
           width={"100%"}
-          bg={styles.colors.darkBlue}
+          bg={bgColor}
           cl={styles.colors.mainWhite}
         >
           ADD

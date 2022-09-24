@@ -101,55 +101,46 @@ const ToDoList = () => {
   function CompletedFilter(item) {
     return item.done == false;
   }
+  function DayFilter(item) {
+    return item.day === currentDay;
+  }
+  console.log(dummyTodoList.filter(DayFilter));
 
+  const dayFilteredDummy = dummyTodoList.filter(DayFilter);
   const filteredByActiveToDo = all
-    ? dummyTodoList
-    : dummyTodoList.filter(active ? ActiveFilter : CompletedFilter);
+    ? dayFilteredDummy
+    : dayFilteredDummy.filter(active ? ActiveFilter : CompletedFilter);
 
   const rendered = filteredByActiveToDo.map((item) => {
-    if (currentDay === item.day) {
-      return (
-        // <SwitchTransition>
-        //   <CSSTransition
-        //     key={dum}
-        //     addEndListener={(node, done) =>
-        //       node.addEventListener("transitionend", done, false)
-        //     }
-        //     classNames="fadec"
-        //     timeout={100}
-        //   >
-        //     {dum ? (
-        //       <>
-        <ToDoItem item={item} />
-        //       </>
-        //     ) : (
-        //       <>
-        //         <b>mm</b>
-        //       </>
-        //     )}
-        //   </CSSTransition>
-        // </SwitchTransition>
-      );
-      //   return <ToDoItem item={item} />;
-    }
+    // if (currentDay === item.day) {
+    //   return (
+    return (
+      // <SwitchTransition>
+      //   <CSSTransition
+      //     key={dum}
+      //     addEndListener={(node, done) =>
+      //       node.addEventListener("transitionend", done, false)
+      //     }
+      //     classNames="AddTodoFade"
+      //     timeout={600}
+      //   >
+      //     {dum ? <ToDoItem item={item} /> : <ToDoItem item={item} />}
+      //   </CSSTransition>
+      // </SwitchTransition>
+      // );
+      <ToDoItem item={item} />
+    );
+    // }
   });
+  // const rendered2 = setTimeout(
+  //   filteredByActiveToDo.map((item) => {
+  //     return <ToDoItem />;
+  //   }),
+  //   1000
+  // );
   return (
     <>
-      <Card bd={"0px solid red"}>
-        {/* <SwitchTransition>
-          <CSSTransition
-            key={currentDay}
-            addEndListener={(node, done) =>
-              node.addEventListener("transitionend", done, false)
-            }
-            classNames="fade"
-            timeout={400}
-          >
-            {currentDay ? <>{rendered}</> : <>{rendered}</>}
-          </CSSTransition>
-        </SwitchTransition> */}
-        {rendered}
-      </Card>
+      <Card bd={"0px solid red"}>{rendered}</Card>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "../../UI/Card.styled";
 import { Button } from "../../UI/Button.styled";
@@ -13,6 +13,7 @@ const LoginPage = () => {
   const { emailIsValid } = useSelector((state) => state.form);
   const { passwordIsValid } = useSelector((state) => state.form);
   const { formIsValid } = useSelector((state) => state.form);
+  const [bgColor, setBgColor] = useState(styles.colors.darkBlue);
   const dispatch = useDispatch();
 
   const formOnSubmit = () => {
@@ -25,13 +26,14 @@ const LoginPage = () => {
       dispatch(formIsValidReducer({ formIsValid: true }));
       console.log("y");
       console.log(formIsValid);
+    } else {
     }
   };
   return (
     <center>
       <Card
-        mg={"10rem 0rem"}
-        height={"22rem"}
+        mg={"15rem 0rem"}
+        height={"18rem"}
         width={"25rem"}
         bg={styles.colors.mainWhite}
         bs={"0px 0px 100px rgb(229, 229, 229)"}
@@ -46,7 +48,7 @@ const LoginPage = () => {
         <div className="loginCircle3"></div>
         <Card
           bd={"none"}
-          height={"3rem"}
+          height={"1rem"}
           ps={"relative"}
           pstp={"0rem"}
           // mg={" 19rem 0 0 0"}
@@ -60,10 +62,10 @@ const LoginPage = () => {
           bd={"none"}
           height={"3rem"}
           ps={"relative"}
-          pstp={"3rem"}
+          pstp={"1rem"}
           // mg={" 19rem 0 0 0"}
           width={"100%"}
-          bg={styles.colors.darkBlue}
+          bg={bgColor}
           cl={styles.colors.mainWhite}
         >
           LOGIN

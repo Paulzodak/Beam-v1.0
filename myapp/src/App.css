@@ -34,3 +34,21 @@
   /* height: 10rem; */
   /* width: 100%; */
 }
+.AddTodoFade-enter {
+  opacity: 0.01;
+  transform: translate(0px, -10px);
+}
+.AddTodoFade-exit {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.AddTodoFade-enter-active {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: 400ms ease-in;
+}
+.AddTodoFade-exit-active {
+  opacity: 0.01;
+  transform: translate(0, 10px);
+  transition: 400ms ease-in;
+}
