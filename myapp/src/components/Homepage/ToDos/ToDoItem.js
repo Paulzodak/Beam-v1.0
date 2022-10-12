@@ -62,7 +62,7 @@ const ToDoItem = ({ item, clickHandler }) => {
           <center>
             <ImageCard
               onClick={() => {
-                clickHandler(item.id);
+                // clickHandler(item.id);
               }}
               height={"2rem"}
               width={"2rem"}

@@ -57,38 +57,19 @@ const ToDoList = () => {
   const clickHandler = (id) => {
     // SET THE DONE STATE FOR TODOS IN THE BROWSER
     dispatch(setTodoActiveness({ id: id }));
-    // console.log(id);
-    // setTimeout(() => {
-    //   console.log(todos);
-    // }, 5000);
-    // console.log(todos);
 
     // SET THE DONE STATE FOR TODOS IN THE BACKEND
-    // setTimeout(() => {
-    //   todos.map((item) => {
-    //     if (String(item.id) === String(id)) {
-    //       // setDone(item.done);
-    //       console.log(item.done);
-    //       console.log(item.id);
-    //       console.log(todos);
-    //       axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
-    //         done: item.done,
-    //       });
-    //     }
-    //   });
-    // }, 2000);
-    // todos.map((item) => {
-    //   if (String(item.id) === String(id)) {
-    //     // setDone(item.done);
-    //     console.log(item.done);
-    //     axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
-    //       done: item.done,
-    //     });
-    //   }
-    // });
-    // axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
-    //   done: done,
-    // });
+    todos.map((item) => {
+      if (String(item.id) === String(id)) {
+        // setDone(item.done);
+        console.log(item.done);
+        console.log(item.id);
+        console.log(todos);
+        axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
+          done: !item.done, // SET TO OPPOSITE BECAUSE THE DONE STATUS GOTTEN IN THIS BLOCK IS A RUNTIME LATE!
+        });
+      }
+    });
   };
 
   const Rendered = filteredByActiveToDo.map((item, index) => {
