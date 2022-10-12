@@ -10,7 +10,8 @@ const AddTodoIcon = () => {
   const showAddTodo = useSelector((state) => state.addTodoForm.showAddTodo);
 
   const handler = () => {
-    dispatch(setShowAddTodoReducer());
+    dispatch(setShowAddTodoReducer({ showAddTodo: true }));
+    sessionStorage.setItem("showAddTodo", true);
     console.log(showAddTodo);
   };
   return (

@@ -3,18 +3,47 @@ import { Card } from "../../../UI/Card.styled";
 import { ImageCard } from "../../../UI/ImageCard.styled";
 import toggleOnIcon from "../../../Images/toggleOn.svg";
 import "./TodoTransition.css";
+import { useDispatch } from "react-redux";
 import toggleOffIcon from "../../../Images/toggleOff.svg";
+import { setTodoActiveness } from "../../../redux/Todos";
+import axios from "axios";
+import { useState } from "react";
 import {
   SwitchTransition,
   CSSTransition,
   TransitionGroup,
 } from "react-transition-group";
 import { useSelector } from "react-redux";
-const ToDoItem = ({ item }) => {
+const BASEURL = "https://63322126a54a0e83d24c89f7.mockapi.io/";
+const ToDoItem = ({ item, clickHandler }) => {
+  const dispatch = useDispatch();
   const FilterStates = useSelector((states) => states.FilterStates);
   const currentDay = useSelector((states) => states.calender.currentDay);
   const active = FilterStates.active;
   const all = FilterStates.all;
+  const todos = useSelector((state) => state.Todos.todos);
+  const currentUserID = useSelector((state) => state.form.currentUserID);
+
+  // --------------------------
+  // MANAGES THE DONE STATE FOR TODOS IN THE BROWSER TO UPDATE THE ONE IN BACKEND
+  // const [done, setDone] = useState();
+
+  // const clickHandler = (e) => {
+  //   console.log(e);
+  //   // SET THE DONE STATE FOR TODOS IN THE BROWSER
+  //   dispatch(setTodoActiveness({ id: item.id, state: true }));
+
+  //   // SET THE DONE STATE FOR TODOS IN THE BACKEND
+  //   todos.map((items) => {
+  //     if (String(items.id) === String(item.id)) {
+  //       setDone(items.done);
+  //       console.log(items.done);
+  //     }
+  //   });
+  //   axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${item.id}`, {
+  //     done: done,
+  //   });
+  // };
   return (
     <>
       <Card
@@ -32,6 +61,9 @@ const ToDoItem = ({ item }) => {
         <Card bd={"0px solid red"}>
           <center>
             <ImageCard
+              onClick={() => {
+                clickHandler(item.id);
+              }}
               height={"2rem"}
               width={"2rem"}
               src={item.done ? toggleOnIcon : toggleOffIcon}
@@ -47,9 +79,16 @@ const ToDoItem = ({ item }) => {
             </b>
           </Card>
           <Card fs={"1.4rem"} mg={"0.5rem 1rem"}>
-            <b>{item.header}</b>
+            <b>{item.header.toUpperCase()}</b>
           </Card>
-          <Card mg={"0.5rem 1rem"}>{item.details}</Card>
+          <Card
+            height={"1.5rem"}
+            ovfy={"scroll"}
+            // bd={"1px solid red"}
+            mg={"0.5rem 1rem"}
+          >
+            {item.details}
+          </Card>
         </Card>
         <Card bd={"0px solid red"}></Card>
       </Card>

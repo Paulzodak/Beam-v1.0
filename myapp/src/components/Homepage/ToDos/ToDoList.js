@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "../../../UI/Card.styled";
 import ToDoItem from "./ToDoItem";
+import Loading from "../../../UI/Loading";
+import { setTodoIsEmpty } from "../../../redux/Todos";
+import { setTodoActiveness } from "../../../redux/Todos";
+import axios from "axios";
 import {
   SwitchTransition,
   CSSTransition,
@@ -11,89 +15,25 @@ import "./TodoTransition.css";
 import { setActiveReducer } from "../../../redux/FilterStates";
 import { setAllReducer } from "../../../redux/FilterStates";
 import LoginPage from "../../Login/LoginPage";
+const BASEURL = "https://63322126a54a0e83d24c89f7.mockapi.io/";
 const ToDoList = () => {
-  // const dummyTodoList = [
-  //   {
-  //     time: "12:00AM",
-  //     header: "pray",
-  //     details: "pray for financial breakthrough",
-  //     done: false,
-  //     day: 0,
-  //   },
-  //   {
-  //     time: "3:00PM",
-  //     header: "Meeting",
-  //     details: "Discuss Million Website",
-  //     done: false,
-  //     day: 1,
-  //   },
-  //   {
-  //     time: "05:30PM",
-  //     header: "Fitness",
-  //     details: "Coach Jill Steven",
-  //     done: true,
-  //     day: 2,
-  //   },
-  //   {
-  //     time: "07:30PM",
-  //     header: "Aperitif",
-  //     details: "Michaela's House",
-  //     done: false,
-  //     day: 2,
-  //   },
-  //   {
-  //     time: "9:00PM",
-  //     header: "Finish App design",
-  //     details: "Complete all Screens",
-  //     done: false,
-  //     day: 3,
-  //   },
-  //   {
-  //     time: "4:00PM",
-  //     header: "Watch Football",
-  //     details: "Chelsea",
-  //     done: false,
-  //     day: 4,
-  //   },
-  //   {
-  //     time: "2:30PM",
-  //     header: "Watch Football",
-  //     details: "Manchester united",
-  //     done: false,
-  //     day: 5,
-  //   },
-  //   {
-  //     time: "8:00AM",
-  //     header: "pray",
-  //     details: "Morning devotion",
-  //     done: false,
-  //     day: 5,
-  //   },
-  //   {
-  //     time: "5:30PM",
-  //     header: "music",
-  //     details: "score songs",
-  //     done: false,
-  //     day: 5,
-  //   },
-  //   {
-  //     time: "4:00PM",
-  //     header: "Watch Football",
-  //     details: "Chelsea",
-  //     done: false,
-  //     day: 6,
-  //   },
-  // ];
+  const loading = useSelector((state) => state.addTodoForm.loading);
+  const todoIsEmpty = useSelector((state) => state.Todos.todoIsEmpty);
+  const currentUserID = useSelector((state) => state.form.currentUserID);
+  // console.log(todoIsEmpty);
 
-  const dummyTodoList = useSelector((state) => state.Todos);
+  // const dummyTodoList = useSelector((state) => state.Todos);
+  const todos = useSelector((state) => state.Todos.todos);
+  console.log(todos);
   const dum = useSelector((state) => state.calender.dum);
-  console.log(dum);
+  // console.log(dum);
   //   ------------ FILTER LOGIC ---------------------------
   const FilterStates = useSelector((states) => states.FilterStates);
   const currentDay = useSelector((states) => states.calender.currentDay);
+
   //   -----------FILTER BY COMPLETED STATE-----------------
   const active = FilterStates.active; // To display either active or completed items
-  const all = FilterStates.all; // to switch between active or commpleted and all
+  const all = FilterStates.all; // to switch between {active/commpleted} or all
   const dispatch = useDispatch();
   function ActiveFilter(item) {
     return item.done == true;
@@ -104,43 +44,109 @@ const ToDoList = () => {
   function DayFilter(item) {
     return item.day === currentDay;
   }
-  console.log(dummyTodoList.filter(DayFilter));
+  // console.log(dummyTodoList.filter(DayFilter));
 
-  const dayFilteredDummy = dummyTodoList.filter(DayFilter);
+  const dayFilteredDummy = todos.filter(DayFilter);
   const filteredByActiveToDo = all
     ? dayFilteredDummy
     : dayFilteredDummy.filter(active ? ActiveFilter : CompletedFilter);
 
-  const rendered = filteredByActiveToDo.map((item) => {
-    // if (currentDay === item.day) {
-    //   return (
+  // MANAGES THE DONE STATE FOR TODOS IN THE BROWSER TO UPDATE THE ONE IN BACKEND
+  const [done, setDone] = useState();
+
+  const clickHandler = (id) => {
+    // SET THE DONE STATE FOR TODOS IN THE BROWSER
+    dispatch(setTodoActiveness({ id: id }));
+    // console.log(id);
+    // setTimeout(() => {
+    //   console.log(todos);
+    // }, 5000);
+    // console.log(todos);
+
+    // SET THE DONE STATE FOR TODOS IN THE BACKEND
+    // setTimeout(() => {
+    //   todos.map((item) => {
+    //     if (String(item.id) === String(id)) {
+    //       // setDone(item.done);
+    //       console.log(item.done);
+    //       console.log(item.id);
+    //       console.log(todos);
+    //       axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
+    //         done: item.done,
+    //       });
+    //     }
+    //   });
+    // }, 2000);
+    // todos.map((item) => {
+    //   if (String(item.id) === String(id)) {
+    //     // setDone(item.done);
+    //     console.log(item.done);
+    //     axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
+    //       done: item.done,
+    //     });
+    //   }
+    // });
+    // axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
+    //   done: done,
+    // });
+  };
+
+  const Rendered = filteredByActiveToDo.map((item, index) => {
     return (
-      // <SwitchTransition>
-      //   <CSSTransition
-      //     key={dum}
-      //     addEndListener={(node, done) =>
-      //       node.addEventListener("transitionend", done, false)
-      //     }
-      //     classNames="AddTodoFade"
-      //     timeout={600}
-      //   >
-      //     {dum ? <ToDoItem item={item} /> : <ToDoItem item={item} />}
-      //   </CSSTransition>
-      // </SwitchTransition>
-      // );
-      <ToDoItem item={item} />
+      <Card
+        onClick={() => {
+          clickHandler(item.id);
+        }}
+      >
+        <ToDoItem
+          // clickHandler={clickHandler}
+          item={item}
+        />
+      </Card>
     );
-    // }
   });
-  // const rendered2 = setTimeout(
-  //   filteredByActiveToDo.map((item) => {
-  //     return <ToDoItem />;
-  //   }),
-  //   1000
-  // );
+  if (filteredByActiveToDo.length > 0) {
+    dispatch(setTodoIsEmpty({ todoIsEmpty: false }));
+  } else if (filteredByActiveToDo.length <= 0) {
+    dispatch(setTodoIsEmpty({ todoIsEmpty: true }));
+  }
+  const noTodosRender = () => {
+    return (
+      <Card mg={"3rem 0rem"}>
+        <center> NO TASKS</center>
+      </Card>
+    );
+  };
+
   return (
     <>
-      <Card bd={"0px solid red"}>{rendered}</Card>
+      <Card ps={"relative"} bd={"0px solid red"}>
+        <SwitchTransition>
+          <CSSTransition
+            key={todoIsEmpty}
+            addEndListener={(node, done) =>
+              node.addEventListener("transitionend", done, false)
+            }
+            classNames="AddTodoFade"
+            timeout={400}
+          >
+            {todoIsEmpty ? noTodosRender : <Card> {Rendered} </Card>}
+          </CSSTransition>
+        </SwitchTransition>
+        {/* {filteredByActiveToDo.length > 0 ? rendered : <Card>no todo </Card>} */}
+        {/* <SwitchTransition>
+          <CSSTransition
+            key={loading}
+            addEndListener={(node, done) =>
+              node.addEventListener("transitionend", done, false)
+            }
+            classNames="AddTodoFade"
+            timeout={600}
+          >
+            {loading ? <Loading /> : <></>}
+          </CSSTransition>
+        </SwitchTransition> */}
+      </Card>
     </>
   );
 };

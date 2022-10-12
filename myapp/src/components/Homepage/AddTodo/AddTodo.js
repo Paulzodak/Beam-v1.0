@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card } from "../../../UI/Card.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../UI/Button.styled";
@@ -8,20 +8,28 @@ import NoteInput from "./Inputs/NoteInput";
 import DayInput from "./Inputs/dayInput";
 import { setTodoReducer } from "../../../redux/Todos";
 import closeIcon from "../../../Images/closeIcon.svg";
+import { setLoadingReducer } from "../../../redux/addTodoForm";
+import { pushTodoReducer } from "../../../redux/Todos";
+
 import { ImageCard } from "../../../UI/ImageCard.styled";
 import { setShowAddTodoReducer } from "../../../redux/addTodoForm";
 import { setFormIsValid } from "../../../redux/addTodoForm";
 import { setNoteInputReducer } from "../../../redux/addTodoForm";
 import { setTaskInputReducer } from "../../../redux/addTodoForm";
+import axios from "axios";
+const BASEURL = "https://63322126a54a0e83d24c89f7.mockapi.io/";
 const AddTodo = () => {
   const styles = useSelector((state) => state.style);
   const calender = useSelector((state) => state.calender);
   const prevTodos = useSelector((state) => state.Todos);
   const inputs = useSelector((state) => state.addTodoForm);
+  const currentUserID = useSelector((state) => state.form.currentUserID);
   const dispatch = useDispatch();
   const fulldate = new Date();
   const hour = fulldate.getHours();
   const min = fulldate.getMinutes();
+  const minutes = min.length > 1 ? min : String(min).padStart(2, "0");
+  console.log(min);
 
   const currenthour =
     hour > 12 && hour < 24 ? hour - 12 : hour && hour === 24 ? 0 : hour;
@@ -37,18 +45,21 @@ const AddTodo = () => {
     console.log(noteInput);
     if (taskInput.length >= 2 && noteInput.length >= 5) {
       setBgColor(styles.colors.darkBlue);
-      dispatch(setFormIsValid({ formIsValid: true }));
-      console.log(calender.currentDay);
-      console.log(inputs);
-      console.log(prevTodos);
-      const newTodo = {
-        time: `${currenthour}:${min}${hour < 12 ? "AM" : "PM"}`,
-        header: inputs.taskInput,
-        details: inputs.noteInput,
-        done: false,
-        day: calender.currentDay,
-      };
-      dispatch(setTodoReducer({ newTodo: newTodo }));
+
+      dispatch(setLoadingReducer({ loading: true }));
+      axios
+        .post(`${BASEURL}/Users/${currentUserID}/Todos`, {
+          time: `${currenthour}:${min}${hour < 12 ? "AM" : "PM"}`,
+          header: inputs.taskInput,
+          details: inputs.noteInput,
+          done: false,
+          day: calender.currentDay,
+          UserId: "2",
+        })
+        .then((response) => {
+          dispatch(setLoadingReducer({ loading: false }));
+          dispatch(pushTodoReducer({ pushTodo: response.data }));
+        });
       dispatch(setTaskInputReducer({ taskInput: "" }));
       dispatch(setNoteInputReducer({ noteInput: "" }));
     } else {
@@ -56,7 +67,8 @@ const AddTodo = () => {
     }
   };
   const closeHandler = () => {
-    dispatch(setShowAddTodoReducer());
+    dispatch(setShowAddTodoReducer({ showAddTodo: false }));
+    sessionStorage.removeItem("showAddTodo");
   };
   return (
     <center>

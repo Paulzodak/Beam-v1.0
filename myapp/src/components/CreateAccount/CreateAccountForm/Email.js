@@ -18,7 +18,6 @@ const Email = () => {
     const timeOut = setTimeout(() => {
       if (event.target.value.includes("@") && event.target.value.length > 5) {
         dispatch(emailIsValidReducer({ emailIsValid: true }));
-        console.log("y");
       } else if (
         !event.target.value.includes("@") ||
         event.target.value.length < 5
@@ -30,7 +29,9 @@ const Email = () => {
       clearTimeout(timeOut);
     };
   };
-  //   useEffect(() => {}, [email, emailIsValid]);
+  // console.log(emailIsValid);
+
+  useEffect(() => {}, [email, emailIsValid]);
   return (
     <>
       <Input
@@ -39,6 +40,7 @@ const Email = () => {
         width={"14rem"}
         placeholder={"EMAIL"}
         bd={"none"}
+        value={email}
         br={"5px"}
         // bdlt={
         //   emailIsValid ? `5px solid ${styles.colors.darkBlue}` : `5px solid red`

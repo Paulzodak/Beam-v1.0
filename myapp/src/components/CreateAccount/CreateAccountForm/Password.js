@@ -7,12 +7,13 @@ const Password = () => {
   const styles = useSelector((state) => state.style);
   const password = useSelector((state) => state.form.password);
   const passwordIsValid = useSelector((state) => state.form.passwordIsValid);
+  const passwordVerify = useSelector((state) => state.form.passwordVerify);
   const dispatch = useDispatch();
 
   const passwordHandler = (event) => {
     dispatch(passwordReducer({ password: event.target.value }));
     const timeOut = setTimeout(() => {
-      if (password.length > 5) {
+      if (password.length > 5 && passwordVerify) {
         dispatch(passwordIsValidReducer({ passwordIsValid: true }));
       } else if (password.length < 5) {
         dispatch(passwordIsValidReducer({ passwordIsValid: false }));
@@ -22,14 +23,16 @@ const Password = () => {
       clearTimeout(timeOut);
     };
   };
+  // console.log(passwordIsValid);
   // useEffect(() => {}, [password]);
   return (
     <>
       <Input
         type="password"
         height={"2rem"}
+        value={password}
         placeholder={"PASSWORD"}
-        mg={"2rem 2rem 0 2rem"}
+        mg={"1rem 2rem 0 2rem"}
         width={"14rem"}
         bd={"none"}
         br={"5px"}

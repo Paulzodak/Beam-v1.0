@@ -8,15 +8,32 @@ const days = [
   { day: "Fri", active: false },
   { day: "Sat", active: false },
 ];
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const date = new Date();
 const day = date.getDay();
 const dayMonth = date.getDate();
+const month = date.getMonth();
 days[day].active = true;
 export const calenderSlice = createSlice({
   name: "calender",
   initialState: {
     currentDay: day,
+    month: months[month],
+    dayMonth: dayMonth,
     dum: false,
     days: days,
   },

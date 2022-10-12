@@ -9,6 +9,7 @@ export const addTodoFormSlice = createSlice({
     taskInputIsValid: true,
     noteInputIsValid: true,
     formIsValid: false,
+    loading: false,
   },
   reducers: {
     setTaskInputReducer: (state, action) => {
@@ -26,13 +27,17 @@ export const addTodoFormSlice = createSlice({
     setFormIsValid: (state, action) => {
       state.formIsValid = action.payload.formIsValid;
     },
-    setShowAddTodoReducer: (state) => {
-      state.showAddTodo = !state.showAddTodo;
+    setShowAddTodoReducer: (state, action) => {
+      state.showAddTodo = action.payload.showAddTodo;
+    },
+    setLoadingReducer: (state, action) => {
+      state.loading = action.payload.loading;
     },
   },
 });
 
 export const {
+  setLoadingReducer,
   setShowAddTodoReducer,
   setNoteInputisValidReducer,
   setTaskInputisValidReducer,

@@ -2,6 +2,7 @@ import styled from "styled-components";
 export const Card = styled.div`
   justify-content: ${(props) => props.gridjc};
   backdrop-filter: ${(props) => props.bdft};
+  border-bottom: ${(props) => props.bdbm};
   float: ${(props) => props.float};
   line-height: ${(props) => props.lh};
   box-shadow: ${(props) => props.bs};

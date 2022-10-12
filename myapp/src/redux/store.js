@@ -7,6 +7,7 @@ import calenderReducer from "./calender";
 import FilterStates from "./FilterStates";
 import addTodoForm from "./addTodoForm";
 import Todos from "./Todos";
+import Menu from "./Menu";
 
 export default configureStore({
   reducer: {
@@ -17,5 +18,6 @@ export default configureStore({
     FilterStates: FilterStates,
     addTodoForm: addTodoForm,
     Todos: Todos,
+    Menu: Menu,
   },
 });
