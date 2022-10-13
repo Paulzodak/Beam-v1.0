@@ -10,6 +10,7 @@ import { setTodoReducer } from "../../../redux/Todos";
 import closeIcon from "../../../Images/closeIcon.svg";
 import { setLoadingReducer } from "../../../redux/addTodoForm";
 import { pushTodoReducer } from "../../../redux/Todos";
+import { showErrorModalReducer } from "../../../redux/Menu";
 
 import { ImageCard } from "../../../UI/ImageCard.styled";
 import { setShowAddTodoReducer } from "../../../redux/addTodoForm";
@@ -59,6 +60,9 @@ const AddTodo = () => {
         .then((response) => {
           dispatch(setLoadingReducer({ loading: false }));
           dispatch(pushTodoReducer({ pushTodo: response.data }));
+        })
+        .catch((err) => {
+          dispatch(showErrorModalReducer({ show: true, message: err.message }));
         });
       dispatch(setTaskInputReducer({ taskInput: "" }));
       dispatch(setNoteInputReducer({ noteInput: "" }));

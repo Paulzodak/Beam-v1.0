@@ -1,5 +1,7 @@
 import styled from "styled-components";
 export const Card = styled.div`
+  vertical-align: ${(props) => props.va};
+  max-height: ${(props) => props.mheight};
   justify-content: ${(props) => props.gridjc};
   backdrop-filter: ${(props) => props.bdft};
   border-bottom: ${(props) => props.bdbm};

@@ -17,6 +17,8 @@ import { setIsTodos } from "../../redux/Todos";
 import Loading from "../../UI/Loading";
 import { setShowAddTodoReducer } from "../../redux/addTodoForm";
 import { currentUserIDReducer } from "../../redux/form";
+import DeleteTodoPromptModal from "../deleteTodoPromptModal";
+import { showErrorModalReducer } from "../../redux/Menu";
 import {
   SwitchTransition,
   CSSTransition,
@@ -41,6 +43,7 @@ const HomePage = () => {
 
   const showAddTodo = useSelector((state) => state.addTodoForm.showAddTodo);
   const showLogoutPrompt = useSelector((state) => state.Menu.showLogoutPrompt);
+  const deleteTodoPrompt = useSelector((state) => state.Menu.deleteTodoPrompt);
   // dispatch(setLoadingReducer({ loading: true }));
   useEffect(() => {
     axios
@@ -54,6 +57,9 @@ const HomePage = () => {
         dispatch(setLoadingReducer({ loading: false }));
         dispatch(setTodoReducer({ todos: response.data }));
         console.log(response.data);
+      })
+      .catch((err) => {
+        dispatch(showErrorModalReducer({ show: true, message: err.message }));
       });
   }, []);
   // setTimeout(() => {
@@ -113,6 +119,19 @@ const HomePage = () => {
           timeout={400}
         >
           {showLogoutPrompt ? <LogoutModal /> : <></>}
+        </CSSTransition>
+      </SwitchTransition>
+      <SwitchTransition>
+        <CSSTransition
+          key={deleteTodoPrompt}
+          // nodeRef={nodeRef}
+          addEndListener={(node, done) =>
+            node.addEventListener("transitionend", done, false)
+          }
+          classNames="AddTodoFade"
+          timeout={400}
+        >
+          {deleteTodoPrompt ? <DeleteTodoPromptModal /> : <></>}
         </CSSTransition>
       </SwitchTransition>
     </Card>

@@ -6,18 +6,9 @@ export const todoSlice = createSlice({
     todos: [],
     isTodos: false,
     todoIsEmpty: false,
-    // {
-    //   id: 1,
-    //   time: "12:00AM",
-    //   header: "pray",
-    //   details: "pray for financial breakthrough",
-    //   done: false,
-    //   day: 0,
-    // },
   },
   reducers: {
     setTodoReducer: (state, action) => {
-      // state.todos.push(action.payload.todos);
       state.todos = action.payload.todos;
     },
     setIsTodos: (state, action) => {
@@ -30,10 +21,16 @@ export const todoSlice = createSlice({
       state.todoIsEmpty = action.payload.todoIsEmpty;
     },
     setTodoActiveness: (state, action) => {
-      // state.todos[action.payload.id].done = action.payload.state;
       state.todos.map((item) => {
         if (String(action.payload.id) === String(item.id)) {
           item.done = !item.done;
+        }
+      });
+    },
+    deleteTodoReducer: (state, action) => {
+      state.todos.map((item, index) => {
+        if (String(action.payload.id) === String(item.id)) {
+          state.todos.splice(index, 1);
         }
       });
     },
@@ -42,6 +39,7 @@ export const todoSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
+  deleteTodoReducer,
   setTodoActiveness,
   setTodoReducer,
   setTodoIsEmpty,

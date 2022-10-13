@@ -8,6 +8,9 @@ import toggleOffIcon from "../../../Images/toggleOff.svg";
 import { setTodoActiveness } from "../../../redux/Todos";
 import axios from "axios";
 import { useState } from "react";
+import closeIcon from "../../../Images/closeIcon.svg";
+import { deleteTodoPromptReducer } from "../../../redux/Menu";
+import { deleteIdReducer } from "../../../redux/Menu";
 import {
   SwitchTransition,
   CSSTransition,
@@ -24,52 +27,37 @@ const ToDoItem = ({ item, clickHandler }) => {
   const todos = useSelector((state) => state.Todos.todos);
   const currentUserID = useSelector((state) => state.form.currentUserID);
 
-  // --------------------------
-  // MANAGES THE DONE STATE FOR TODOS IN THE BROWSER TO UPDATE THE ONE IN BACKEND
-  // const [done, setDone] = useState();
+  const deleteHandler = (id) => {
+    console.log(id);
 
-  // const clickHandler = (e) => {
-  //   console.log(e);
-  //   // SET THE DONE STATE FOR TODOS IN THE BROWSER
-  //   dispatch(setTodoActiveness({ id: item.id, state: true }));
+    dispatch(deleteTodoPromptReducer({ deleteTodoPrompt: true }));
+    dispatch(deleteIdReducer({ deleteId: id }));
+  };
 
-  //   // SET THE DONE STATE FOR TODOS IN THE BACKEND
-  //   todos.map((items) => {
-  //     if (String(items.id) === String(item.id)) {
-  //       setDone(items.done);
-  //       console.log(items.done);
-  //     }
-  //   });
-  //   axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${item.id}`, {
-  //     done: done,
-  //   });
-  // };
   return (
     <>
       <Card
         mg={"2rem 2rem"}
-        // bd={"1px solid red"}
-        height={"8rem"}
         br={"3rem 0rem 3rem 0rem "}
         dp={"grid"}
         gridC={"15% 70% 15%"}
         bs={"0px 0px 30px rgb(230, 230, 230)"}
         pd={"1rem"}
-        // tr={"5s"}
       >
         {/* ----------TOGGLE ICONS------------ */}
-        <Card bd={"0px solid red"}>
-          <center>
-            <ImageCard
-              onClick={() => {
-                // clickHandler(item.id);
-              }}
-              height={"2rem"}
-              width={"2rem"}
-              src={item.done ? toggleOnIcon : toggleOffIcon}
-              mg={"2rem 0 0 0"}
-            />
-          </center>
+        <Card ps={"relative"} bd={"0px solid red"}>
+          <ImageCard
+            onClick={() => {
+              clickHandler(item.id);
+            }}
+            height={"2rem"}
+            width={"2rem"}
+            src={item.done ? toggleOnIcon : toggleOffIcon}
+            ta={"center"}
+            ps={"absolute"}
+            pstp={"42%"}
+            pslf={"30%"}
+          />
         </Card>
         {/* ----------CONTENTS-------------- */}
         <Card bd={"0px solid red"}>
@@ -81,19 +69,20 @@ const ToDoItem = ({ item, clickHandler }) => {
           <Card fs={"1.4rem"} mg={"0.5rem 1rem"}>
             <b>{item.header.toUpperCase()}</b>
           </Card>
-          <Card
-            height={"1.5rem"}
-            ovfy={"scroll"}
-            // bd={"1px solid red"}
-            mg={"0.5rem 1rem"}
-          >
+          <Card mheight={"5rem"} ovfy={"scroll"} mg={"0.5rem 1rem"}>
             {item.details}
           </Card>
         </Card>
-        <Card bd={"0px solid red"}></Card>
+        <Card bd={"0px solid red"}>
+          <ImageCard
+            float={"right"}
+            src={closeIcon}
+            height={"2rem"}
+            width={"2rem"}
+            onClick={(id) => deleteHandler(item.id, id)}
+          />
+        </Card>
       </Card>
-      {/* </CSSTransition>
-      </SwitchTransition> */}
     </>
   );
 };

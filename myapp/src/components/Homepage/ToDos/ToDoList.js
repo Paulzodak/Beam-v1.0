@@ -5,6 +5,7 @@ import ToDoItem from "./ToDoItem";
 import Loading from "../../../UI/Loading";
 import { setTodoIsEmpty } from "../../../redux/Todos";
 import { setTodoActiveness } from "../../../redux/Todos";
+import { showErrorModalReducer } from "../../../redux/Menu";
 import axios from "axios";
 import {
   SwitchTransition,
@@ -44,7 +45,6 @@ const ToDoList = () => {
   function DayFilter(item) {
     return item.day === currentDay;
   }
-  // console.log(dummyTodoList.filter(DayFilter));
 
   const dayFilteredDummy = todos.filter(DayFilter);
   const filteredByActiveToDo = all
@@ -61,13 +61,16 @@ const ToDoList = () => {
     // SET THE DONE STATE FOR TODOS IN THE BACKEND
     todos.map((item) => {
       if (String(item.id) === String(id)) {
-        // setDone(item.done);
-        console.log(item.done);
-        console.log(item.id);
-        console.log(todos);
-        axios.put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
-          done: !item.done, // SET TO OPPOSITE BECAUSE THE DONE STATUS GOTTEN IN THIS BLOCK IS A RUNTIME LATE!
-        });
+        axios
+          .put(`${BASEURL}/Users/${currentUserID}/Todos/${id}`, {
+            done: !item.done, // SET TO OPPOSITE BECAUSE THE DONE STATUS GOTTEN IN THIS BLOCK IS A RUNTIME LATE!
+          })
+          .then()
+          .catch((err) => {
+            dispatch(
+              showErrorModalReducer({ show: true, message: err.message })
+            );
+          });
       }
     });
   };
@@ -76,13 +79,10 @@ const ToDoList = () => {
     return (
       <Card
         onClick={() => {
-          clickHandler(item.id);
+          // clickHandler(item.id);
         }}
       >
-        <ToDoItem
-          // clickHandler={clickHandler}
-          item={item}
-        />
+        <ToDoItem clickHandler={clickHandler} item={item} />
       </Card>
     );
   });
@@ -114,19 +114,6 @@ const ToDoList = () => {
             {todoIsEmpty ? noTodosRender : <Card> {Rendered} </Card>}
           </CSSTransition>
         </SwitchTransition>
-        {/* {filteredByActiveToDo.length > 0 ? rendered : <Card>no todo </Card>} */}
-        {/* <SwitchTransition>
-          <CSSTransition
-            key={loading}
-            addEndListener={(node, done) =>
-              node.addEventListener("transitionend", done, false)
-            }
-            classNames="AddTodoFade"
-            timeout={600}
-          >
-            {loading ? <Loading /> : <></>}
-          </CSSTransition>
-        </SwitchTransition> */}
       </Card>
     </>
   );

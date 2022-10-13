@@ -7,6 +7,7 @@ import Loading from "./UI/Loading";
 import { loginAuthReducer } from "./redux/form";
 import { useDispatch } from "react-redux";
 import { currentUserIDReducer } from "./redux/form";
+import ErrorModal from "./components/errorModal";
 
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import {
@@ -39,6 +40,8 @@ function App() {
   const { register } = useSelector((state) => state.form);
   const { loginAuth } = useSelector((state) => state.form);
   const dispatch = useDispatch();
+  const { errorModal } = useSelector((state) => state.Menu);
+  console.log(errorModal);
   // sessionStorage.setItem("showAddTodo", false);
 
   // dispatch(
@@ -81,6 +84,21 @@ function App() {
           classNames="fade"
         >
           {register ? <CreateAccountPage /> : renderedLogin}
+        </CSSTransition>
+      </SwitchTransition>
+      <SwitchTransition>
+        <CSSTransition
+          key={errorModal.show}
+          addEndListener={(node, done) =>
+            node.addEventListener("transitionend", done, false)
+          }
+          classNames="fade"
+        >
+          {errorModal.show ? (
+            <ErrorModal message={errorModal.message} />
+          ) : (
+            <></>
+          )}
         </CSSTransition>
       </SwitchTransition>
       {/* {<CreateAccountPage />} */}

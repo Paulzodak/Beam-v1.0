@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { loginAuthReducer } from "../../redux/form";
 import { currentUserIDReducer } from "../../redux/form";
 import axios from "axios";
+import { showErrorModalReducer } from "../../redux/Menu";
 const BASEURL = "https://63322126a54a0e83d24c89f7.mockapi.io/";
 const LoginPage = () => {
   const styles = useSelector((state) => state.style);
@@ -24,10 +25,15 @@ const LoginPage = () => {
   const { loginAuth } = useSelector((state) => state.form);
   const { currentUserID } = useSelector((state) => state.form);
   useEffect(() => {
-    axios.get(`${BASEURL}/Users`).then((response) => {
-      // console.log(response.data);
-      setUsers(response.data);
-    });
+    axios
+      .get(`${BASEURL}/Users`)
+      .then((response) => {
+        console.log(response);
+        setUsers(response.data);
+      })
+      .catch((err) => {
+        dispatch(showErrorModalReducer({ show: true, message: err.message }));
+      });
   }, []);
 
   const formOnSubmit = () => {
