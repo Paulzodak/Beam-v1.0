@@ -18,7 +18,7 @@ const Menu = () => {
     "SATURDAY",
   ];
   const styles = useSelector((state) => state.style);
-  const dayNumber = useSelector((state) => state.calender.currentDay);
+  const dayNumber = useSelector((state) => state.calender.staticDay);
   const dayStrings = days[dayNumber];
   const month = useSelector((state) => state.calender.month);
   const dayMonth = useSelector((state) => state.calender.dayMonth);
@@ -32,6 +32,7 @@ const Menu = () => {
       mg={"2rem 3rem 0rem 3rem"}
       dp={"grid"}
       gridR={"50% 50%"}
+      font={styles.fonts.mainFont}
     >
       <Card>
         <CardSpan>

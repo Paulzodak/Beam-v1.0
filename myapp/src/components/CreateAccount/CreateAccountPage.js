@@ -82,6 +82,7 @@ const CreateAccountPage = () => {
         width={"25rem"}
         bg={styles.colors.mainWhite}
         bs={"0px 0px 100px rgb(229, 229, 229)"}
+        font={styles.fonts.mainFont}
         br={"2rem 0px"}
         ovfy={"hidden"}
         ovfx={"hidden"}
@@ -96,6 +97,9 @@ const CreateAccountPage = () => {
           fs={"0.8rem"}
           ps={"absolute"}
           mg={"1rem 0 0 20rem"}
+          hvfs={"0.82rem"}
+          hvcl={styles.colors.darkBlue}
+          tr={"0.2s"}
         >
           Login?
         </Card>

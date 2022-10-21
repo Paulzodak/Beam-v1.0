@@ -26,6 +26,7 @@ const LogoutModal = () => {
       ps={"absolute"}
       pstp={"1rem"}
       width={"100vw"}
+      font={styles.fonts.mainFont}
 
       // bg={"white"}
       // font={styles.fonts.main}
@@ -65,7 +66,7 @@ const LogoutModal = () => {
             bg={styles.colors.darkBlue}
             cl={styles.colors.mainWhite}
           >
-            LOGOUT?
+            <i>LOGOUT?</i>
           </Button>
         </Card>
       </center>

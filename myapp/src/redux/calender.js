@@ -32,6 +32,7 @@ export const calenderSlice = createSlice({
   name: "calender",
   initialState: {
     currentDay: day,
+    staticDay: day,
     month: months[month],
     dayMonth: dayMonth,
     dum: false,

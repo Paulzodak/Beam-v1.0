@@ -26,6 +26,7 @@ const NoteInput = () => {
     <Card>
       <Input
         placeholder="NOTES"
+        font={styles.fonts.mainFont}
         height={"3rem"}
         width={"100%"}
         mg={"0.5rem 0rem"}

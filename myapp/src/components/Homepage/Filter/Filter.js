@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDumReducer } from "../../../redux/calender";
 
 const Filter = () => {
+  const styles = useSelector((state) => state.style);
   const allFilter = useSelector((state) => state.FilterStates.all);
   const activeFilter = useSelector((state) => state.FilterStates.active);
   console.log(allFilter);
@@ -26,7 +27,12 @@ const Filter = () => {
   };
 
   return (
-    <Card height={"2rem"} width={"100%"} mg={"1rem 0rem"}>
+    <Card
+      font={styles.fonts.mainFont}
+      height={"2rem"}
+      width={"100%"}
+      mg={"1rem 0rem"}
+    >
       <Card
         float={"right"}
         dp={"grid"}
@@ -40,21 +46,21 @@ const Filter = () => {
           // tr={"3s"}
           bdbm={allFilter ? "2px solid black" : null}
         >
-          All
+          <i> All</i>
         </Card>
         <Card
           mg={"0rem 1rem"}
           onClick={activeHandler}
           bdbm={activeFilter ? "2px solid black" : null}
         >
-          Completed
+          <i> Completed</i>
         </Card>
         <Card
           mg={"0rem 1rem"}
           onClick={completedHandler}
           bdbm={!activeFilter && !allFilter ? "2px solid black" : null}
         >
-          Active
+          <i> Active</i>
         </Card>
       </Card>
     </Card>

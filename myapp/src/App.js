@@ -8,6 +8,7 @@ import { loginAuthReducer } from "./redux/form";
 import { useDispatch } from "react-redux";
 import { currentUserIDReducer } from "./redux/form";
 import ErrorModal from "./components/errorModal";
+import { Card } from "./UI/Card.styled";
 
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import {

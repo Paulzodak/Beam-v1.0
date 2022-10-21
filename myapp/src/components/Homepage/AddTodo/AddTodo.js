@@ -87,6 +87,7 @@ const AddTodo = () => {
         ovfx={"hidden"}
         position={"relative"}
         zindex={"1"}
+        font={styles.fonts.mainFont}
         // bd={"1px solid red"}
       >
         <ImageCard
@@ -114,12 +115,13 @@ const AddTodo = () => {
           bd={"none"}
           height={"4rem"}
           ps={"relative"}
-          pstp={"2rem"}
+          pstp={"1.8rem"}
           width={"100%"}
           bg={bgColor}
           cl={styles.colors.mainWhite}
+          font={"inherit"}
         >
-          ADD
+          <i>ADD</i>
         </Button>
       </Card>
     </center>

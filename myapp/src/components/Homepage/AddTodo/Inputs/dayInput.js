@@ -15,6 +15,7 @@ const DayInput = () => {
         bg={style.colors.darkBlue}
         bd={"none"}
         br={"2rem"}
+        font={style.fonts.mainFont}
       >
         {/* <Card
           width={"10rem"}

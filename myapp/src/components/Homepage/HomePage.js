@@ -44,16 +44,12 @@ const HomePage = () => {
   const showAddTodo = useSelector((state) => state.addTodoForm.showAddTodo);
   const showLogoutPrompt = useSelector((state) => state.Menu.showLogoutPrompt);
   const deleteTodoPrompt = useSelector((state) => state.Menu.deleteTodoPrompt);
-  // dispatch(setLoadingReducer({ loading: true }));
+
   useEffect(() => {
     axios
       .get(`${BASEURL}/Users/${currentUserID}/Todos`)
 
       .then((response) => {
-        // response.data.map((item) => {
-        //   // JSON.parse(item)
-        //   // dispatch(setTodoReducer({ todos: item }));
-        // });
         dispatch(setLoadingReducer({ loading: false }));
         dispatch(setTodoReducer({ todos: response.data }));
         console.log(response.data);
@@ -62,17 +58,6 @@ const HomePage = () => {
         dispatch(showErrorModalReducer({ show: true, message: err.message }));
       });
   }, []);
-  // setTimeout(() => {
-  //   dispatch(setIsTodos({ isTodo: true }));
-  // }, 2000);
-  // todos.map((item) => {
-  //   if (item.day === currentDay) {
-  //     dispatch(setIsTodos({ isTodo: true }));
-  //   } else {
-  //     dispatch(setIsTodos({ isTodo: false }));
-  //   }
-  // });
-  console.log(isTodos);
 
   const nodeRef = useRef(null);
   return (
@@ -80,19 +65,7 @@ const HomePage = () => {
       <Menu />
       <Calender />
       <Filter />
-      {/* <SwitchTransition>
-        <CSSTransition
-          key={isTodos}
-          // nodeRef={nodeRef}
-          addEndListener={(node, done) =>
-            node.addEventListener("transitionend", done, false)
-          }
-          classNames="AddTodoFade"
-          timeout={400}
-        >
-          {isTodos ? <ToDoList /> : <Card>NO TODOS</Card>}
-        </CSSTransition>
-      </SwitchTransition> */}
+
       <ToDoList />
 
       <SwitchTransition>

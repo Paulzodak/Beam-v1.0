@@ -12,7 +12,9 @@ export const styleSlice = createSlice({
       darkGrey: "#EEEEEE",
       activeRed: "#EEC2C3",
     },
-    fonts: {},
+    fonts: {
+      mainFont: "'Open Sans', sans-serif",
+    },
     icons: {
       arrowBackIcon: arrowBackIcon,
       moreIcon: moreIcon,

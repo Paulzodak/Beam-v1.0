@@ -1,5 +1,6 @@
 import styled from "styled-components";
 export const Button = styled.button`
+  font-weight: ${(props) => props.fw};
   float: ${(props) => props.float};
   border-radius: ${(props) => props.br};
   grid-template-columns: ${(props) => props.gridC};

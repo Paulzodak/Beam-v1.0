@@ -19,6 +19,7 @@ import {
 import { useSelector } from "react-redux";
 const BASEURL = "https://63322126a54a0e83d24c89f7.mockapi.io/";
 const ToDoItem = ({ item, clickHandler }) => {
+  const styles = useSelector((state) => state.style);
   const dispatch = useDispatch();
   const FilterStates = useSelector((states) => states.FilterStates);
   const currentDay = useSelector((states) => states.calender.currentDay);
@@ -41,8 +42,10 @@ const ToDoItem = ({ item, clickHandler }) => {
         br={"3rem 0rem 3rem 0rem "}
         dp={"grid"}
         gridC={"15% 70% 15%"}
-        bs={"0px 0px 30px rgb(230, 230, 230)"}
+        bs={"0px 0px 30px rgb(235, 235, 235)"}
         pd={"1rem"}
+        // bg={styles.colors.darkGrey}
+        font={styles.fonts.mainFont}
       >
         {/* ----------TOGGLE ICONS------------ */}
         <Card ps={"relative"} bd={"0px solid red"}>
@@ -70,7 +73,7 @@ const ToDoItem = ({ item, clickHandler }) => {
             <b>{item.header.toUpperCase()}</b>
           </Card>
           <Card mheight={"5rem"} ovfy={"scroll"} mg={"0.5rem 1rem"}>
-            {item.details}
+            <i>{item.details}</i>
           </Card>
         </Card>
         <Card bd={"0px solid red"}>

@@ -10,6 +10,7 @@ const Form = () => {
         width={"80%"}
         // bd={"1px solid red"}
         mg={"3rem 2.5rem 0rem 2.5rem "}
+        font={"'Open Sans', sans-serif"}
       >
         <Email />
         <Password />

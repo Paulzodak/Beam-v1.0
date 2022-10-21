@@ -36,6 +36,7 @@ const TaskInput = () => {
         onChange={onChangeHandler}
         bd={"none"}
         br={"5px"}
+        font={styles.fonts.mainFont}
         value={taskInput}
         bdbt={
           taskInputIsValid

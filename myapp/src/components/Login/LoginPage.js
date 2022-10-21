@@ -74,6 +74,7 @@ const LoginPage = () => {
         ovfx={"hidden"}
         position={"relative"}
         zindex={"1"}
+        font={styles.fonts.mainFont}
       >
         <div className="loginCircle1"></div>
         <div className="loginCircle2"></div>
@@ -83,6 +84,9 @@ const LoginPage = () => {
           fs={"0.8rem"}
           ps={"absolute"}
           mg={"1rem 0 0 16rem"}
+          hvfs={"0.82rem"}
+          hvcl={styles.colors.darkBlue}
+          tr={"0.2s"}
         >
           Create account?
         </Card>
@@ -107,8 +111,10 @@ const LoginPage = () => {
           width={"100%"}
           bg={bgColor}
           cl={styles.colors.mainWhite}
+          font={styles.mainFont}
+          fw={"400"}
         >
-          LOGIN
+          <i>LOGIN</i>
         </Button>
       </Card>
     </center>

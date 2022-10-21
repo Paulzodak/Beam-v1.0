@@ -25,6 +25,7 @@ const ErrorModal = ({ message }) => {
       ps={"absolute"}
       pstp={"1rem"}
       width={"100vw"}
+      font={styles.fonts.mainFont}
 
       // bg={"white"}
       // font={styles.fonts.main}
@@ -66,7 +67,7 @@ const ErrorModal = ({ message }) => {
             bg={styles.colors.darkBlue}
             cl={styles.colors.mainWhite}
           >
-            OKAY
+            <i> OKAY</i>
           </Button>
         </Card>
       </center>

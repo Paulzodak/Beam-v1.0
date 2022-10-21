@@ -10,14 +10,8 @@ const Calender = () => {
   const days = useSelector((state) => state.calender.days);
 
   const dispatch = useDispatch();
-  //   console.log(days);
-  //   const handler = (index) => {
-  //     dispatch(setActiveReducer({ index: index }));
-  //   };
+
   const rendered = days.map((item, index) => {
-    // const calenderDayHandler = () => {
-    //   dispatch(setDayReducer({ day: 5 }));
-    // };
     const handler = (index) => {
       dispatch(setActiveReducer({ index: index }));
       dispatch(setDumReducer());
@@ -33,6 +27,7 @@ const Calender = () => {
         pd={"1.4rem 0rem"}
         onClick={() => handler(index)}
         tr={"0.5s"}
+        font={styles.fonts.mainFont}
       >
         {item.day}
       </Card>
@@ -42,7 +37,8 @@ const Calender = () => {
     <Card
       dp={"grid"}
       gridC={"auto auto auto auto auto auto auto"}
-      bg={styles.colors.bgGrey}
+      // bg={styles.colors.bgGrey}
+      bg={"white"}
       height={"6rem"}
       width={"100vw"}
       pd={"1rem 1rem"}

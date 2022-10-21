@@ -47,6 +47,7 @@ const Email = () => {
           emailIsValid ? `2px solid ${styles.colors.darkBlue}` : `2px solid red`
         }
         onChange={emailHandler}
+        font={styles.mainFont}
       />
     </>
   );

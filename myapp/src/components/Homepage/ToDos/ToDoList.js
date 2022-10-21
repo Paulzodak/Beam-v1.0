@@ -18,6 +18,7 @@ import { setAllReducer } from "../../../redux/FilterStates";
 import LoginPage from "../../Login/LoginPage";
 const BASEURL = "https://63322126a54a0e83d24c89f7.mockapi.io/";
 const ToDoList = () => {
+  const styles = useSelector((state) => state.style);
   const loading = useSelector((state) => state.addTodoForm.loading);
   const todoIsEmpty = useSelector((state) => state.Todos.todoIsEmpty);
   const currentUserID = useSelector((state) => state.form.currentUserID);
@@ -93,8 +94,10 @@ const ToDoList = () => {
   }
   const noTodosRender = () => {
     return (
-      <Card mg={"3rem 0rem"}>
-        <center> NO TASKS</center>
+      <Card font={styles.fonts.mainFont} mg={"3rem 0rem"}>
+        <center>
+          <i>NO TASKS</i>{" "}
+        </center>
       </Card>
     );
   };
