@@ -11,6 +11,7 @@ import { loginAuthReducer } from "../../redux/form";
 import { currentUserIDReducer } from "../../redux/form";
 import axios from "axios";
 import { showErrorModalReducer } from "../../redux/Menu";
+import { ClipLoader } from "react-spinners";
 const BASEURL = "https://63322126a54a0e83d24c89f7.mockapi.io/";
 const LoginPage = () => {
   const styles = useSelector((state) => state.style);
@@ -21,20 +22,21 @@ const LoginPage = () => {
   const { formIsValid } = useSelector((state) => state.form);
   const [bgColor, setBgColor] = useState(styles.colors.darkBlue);
   const dispatch = useDispatch();
-  const [users, setUsers] = useState([{}]);
+  // const [users, setUsers] = useState([{}]);
   const { loginAuth } = useSelector((state) => state.form);
   const { currentUserID } = useSelector((state) => state.form);
-  useEffect(() => {
-    axios
-      .get(`${BASEURL}/Users`)
-      .then((response) => {
-        console.log(response);
-        setUsers(response.data);
-      })
-      .catch((err) => {
-        dispatch(showErrorModalReducer({ show: true, message: err.message }));
-      });
-  }, []);
+  const { users } = useSelector((state) => state.Menu);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${BASEURL}/Users`)
+  //     .then((response) => {
+  //       console.log(response);
+  //       setUsers(response.data);
+  //     })
+  //     .catch((err) => {
+  //       dispatch(showErrorModalReducer({ show: true, message: err.message }));
+  //     });
+  // }, []);
 
   const formOnSubmit = () => {
     users.map((item) => {
@@ -115,6 +117,7 @@ const LoginPage = () => {
           fw={"400"}
         >
           <i>LOGIN</i>
+          {/* <ClipLoader /> */}
         </Button>
       </Card>
     </center>

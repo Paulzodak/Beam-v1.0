@@ -78,11 +78,7 @@ const ToDoList = () => {
 
   const Rendered = filteredByActiveToDo.map((item, index) => {
     return (
-      <Card
-        onClick={() => {
-          // clickHandler(item.id);
-        }}
-      >
+      <Card>
         <ToDoItem clickHandler={clickHandler} item={item} />
       </Card>
     );

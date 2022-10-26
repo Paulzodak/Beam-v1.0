@@ -10,6 +10,9 @@ export const MenuSlice = createSlice({
     },
     deleteTodoPrompt: false,
     deleteId: 45,
+    loaderModal: false,
+    appReady: false,
+    users: [{}],
   },
   reducers: {
     showLogoutPromptReducer: (state, action) => {
@@ -25,11 +28,23 @@ export const MenuSlice = createSlice({
     deleteIdReducer: (state, action) => {
       state.deleteId = action.payload.deleteId;
     },
+    setLoaderModal: (state, action) => {
+      state.loaderModal = action.payload.loaderModal;
+    },
+    setAppReady: (state, action) => {
+      state.appReady = action.payload.appReady;
+    },
+    setUsers: (state, action) => {
+      state.users = action.payload.users;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
+  setUsers,
+  setAppReady,
+  setLoaderModal,
   deleteIdReducer,
   deleteTodoPromptReducer,
   showLogoutPromptReducer,

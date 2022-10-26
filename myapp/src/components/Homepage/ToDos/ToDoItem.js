@@ -41,49 +41,76 @@ const ToDoItem = ({ item, clickHandler }) => {
         mg={"2rem 2rem"}
         br={"3rem 0rem 3rem 0rem "}
         dp={"grid"}
-        gridC={"15% 70% 15%"}
+        gridC={"12% 76% 12%"}
         bs={"0px 0px 30px rgb(235, 235, 235)"}
-        pd={"1rem"}
+        // pd={"1rem"}
+        bg={"white"}
+        ovfy={"hidden"}
         // bg={styles.colors.darkGrey}
         font={styles.fonts.mainFont}
       >
         {/* ----------TOGGLE ICONS------------ */}
-        <Card ps={"relative"} bd={"0px solid red"}>
-          <ImageCard
-            onClick={() => {
-              clickHandler(item.id);
-            }}
-            height={"2rem"}
-            width={"2rem"}
-            src={item.done ? toggleOnIcon : toggleOffIcon}
-            ta={"center"}
-            ps={"absolute"}
-            pstp={"42%"}
-            pslf={"30%"}
-          />
+        <Card bg={styles.colors.darkBlue} ps={"relative"} bd={"0px solid red"}>
+          <center>
+            <ImageCard
+              onClick={() => {
+                clickHandler(item.id);
+              }}
+              height={"2rem"}
+              width={"2rem"}
+              src={item.done ? toggleOnIcon : toggleOffIcon}
+              ps={"relative"}
+              pstp={"3.5rem"}
+            />
+          </center>
         </Card>
         {/* ----------CONTENTS-------------- */}
-        <Card bd={"0px solid red"}>
-          <Card fs={"1rem"} mg={"0.5rem 1rem"}>
+        <Card mg={"1rem 0"} bd={"0px solid red"}>
+          <Card
+            br={"0.2rem"}
+            bdlt={`2px solid ${styles.colors.darkBlue}`}
+            // bdrt={`2px solid ${styles.colors.darkBlue}`}
+            pd={"0rem 1rem"}
+            fs={"1rem"}
+            mg={"0.5rem 1rem"}
+          >
             <b>
               <i>{item.time}</i>
             </b>
           </Card>
-          <Card fs={"1.4rem"} mg={"0.5rem 1rem"}>
+          <Card
+            br={"0.2rem"}
+            // bdlt={`2px solid ${styles.colors.darkBlue}`}
+            // bdrt={`2px solid ${styles.colors.darkBlue}`}
+            // pd={"0rem 1rem"}
+            fs={"1.4rem"}
+            mg={"0.5rem 1rem"}
+          >
             <b>{item.header.toUpperCase()}</b>
           </Card>
-          <Card mheight={"5rem"} ovfy={"scroll"} mg={"0.5rem 1rem"}>
+          <Card
+            br={"0.2rem"}
+            bdlt={`2px solid ${styles.colors.darkBlue}`}
+            // bdrt={`2px solid ${styles.colors.darkBlue}`}
+            pd={"0rem 1rem"}
+            mheight={"5rem"}
+            ovfy={"scroll"}
+            mg={"0.5rem 1rem"}
+          >
             <i>{item.details}</i>
           </Card>
         </Card>
-        <Card bd={"0px solid red"}>
-          <ImageCard
-            float={"right"}
-            src={closeIcon}
-            height={"2rem"}
-            width={"2rem"}
-            onClick={(id) => deleteHandler(item.id, id)}
-          />
+        <Card bg={styles.colors.darkBlue} bd={"0px solid red"}>
+          <center>
+            {" "}
+            <ImageCard
+              mg={"1rem 0"}
+              src={closeIcon}
+              height={"2rem"}
+              width={"2rem"}
+              onClick={(id) => deleteHandler(item.id, id)}
+            />
+          </center>
         </Card>
       </Card>
     </>

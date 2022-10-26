@@ -21,9 +21,9 @@ const ErrorModal = ({ message }) => {
     <Card
       zindex={"1000"}
       bdft={"blur(10px)"}
-      height={"50rem"}
-      ps={"absolute"}
-      pstp={"1rem"}
+      height={"100vh"}
+      ps={"fixed"}
+      pstp={"0rem"}
       width={"100vw"}
       font={styles.fonts.mainFont}
 
@@ -35,9 +35,8 @@ const ErrorModal = ({ message }) => {
         <Card
           width={"20rem"}
           //   height={"7rem"}
-          position={"fixed"}
-          pstp={"2rem"}
-          mg={"10rem 0rem 0rem"}
+
+          mg={"45% 0 0 0"}
           bg={styles.colors.mainWhite}
           bs={"0px 0px 20px rgb(229, 229, 229)"}
           br={"3rem 0px"}

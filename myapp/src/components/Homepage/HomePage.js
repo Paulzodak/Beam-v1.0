@@ -29,6 +29,7 @@ const HomePage = () => {
   const days = useSelector((state) => state.calender.days);
   const dum = useSelector((state) => state.calender.dum);
   const currentDay = useSelector((states) => states.calender.currentDay);
+  const styles = useSelector((state) => state.style);
   const dispatch = useDispatch();
   dispatch(
     currentUserIDReducer({ currentUserID: sessionStorage.getItem("ID") })
@@ -62,6 +63,28 @@ const HomePage = () => {
   const nodeRef = useRef(null);
   return (
     <Card>
+      {/* -----------CIRLCES DESIGN--------------- */}
+      <Card
+        bg={styles.colors.darkBlue}
+        height={"14rem"}
+        width={"14rem"}
+        br={"100%"}
+        ps={"absolute"}
+        pstp={"-3rem"}
+        pslf={"-3rem"}
+        zindex={"-10000"}
+      />
+      <Card
+        bg={styles.colors.darkBlue}
+        height={"4rem"}
+        width={"4rem"}
+        br={"100%"}
+        ps={"absolute"}
+        pstp={"-1rem"}
+        psrt={"-1rem"}
+        zindex={"-10000"}
+      />
+      {/*------------------------  */}
       <Menu />
       <Calender />
       <Filter />

@@ -6,23 +6,23 @@ import closeIcon from "../Images/closeIcon.svg";
 import { Button } from "../UI/Button.styled";
 import { showLogoutPromptReducer } from "../redux/Menu";
 import { loginAuthReducer } from "../redux/form";
-const LogoutModal = () => {
+import { showErrorModalReducer } from "../redux/Menu";
+import { ClipLoader } from "react-spinners";
+const LoaderModal = () => {
   const styles = useSelector((state) => state.style);
   const dispatch = useDispatch();
   const closeHandler = () => {
     dispatch(showLogoutPromptReducer({ showLogoutPrompt: false }));
   };
 
-  const logoutHandler = () => {
-    dispatch(loginAuthReducer({ loginAuth: false }));
-    sessionStorage.removeItem("Login");
-    dispatch(showLogoutPromptReducer({ showLogoutPrompt: false }));
+  const Handler = () => {
+    dispatch(showErrorModalReducer({ show: false, message: "" }));
   };
   return (
     <Card
       zindex={"1000"}
       bdft={"blur(10px)"}
-      height={"50rem"}
+      height={"100vh"}
       ps={"fixed"}
       pstp={"0rem"}
       width={"100vw"}
@@ -33,10 +33,20 @@ const LogoutModal = () => {
       //   font={" 'Rubik', sans-serif"}
     >
       <center>
-        <Card
+        <Card mg={"50% 0"}>
+          <ClipLoader
+            color={styles.colors.darkBlue}
+            size={100}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </Card>
+        {/* <Card
           width={"20rem"}
-          height={"7rem"}
-          mg={"45% 0 0 0"}
+          //   height={"7rem"}
+          position={"fixed"}
+          pstp={"2rem"}
+          mg={"10rem 0rem 0rem"}
           bg={styles.colors.mainWhite}
           bs={"0px 0px 20px rgb(229, 229, 229)"}
           br={"3rem 0px"}
@@ -51,11 +61,13 @@ const LogoutModal = () => {
             float={"right"}
             mg={"1rem 1rem"}
             src={closeIcon}
-            onClick={closeHandler}
+            onClick={Handler}
           />
-          <Card bd={"0px solid red"} mg={"2rem 5rem 0rem 5rem"}></Card>
+          <Card bd={"0px solid red"} mg={"3rem 0rem 0rem 0rem"} pd={"1rem"}>
+            {message}
+          </Card>
           <Button
-            onClick={logoutHandler}
+            onClick={Handler}
             bd={"none"}
             height={"3rem"}
             ps={"relative"}
@@ -64,12 +76,12 @@ const LogoutModal = () => {
             bg={styles.colors.darkBlue}
             cl={styles.colors.mainWhite}
           >
-            <i>LOGOUT?</i>
+            <i> OKAY</i>
           </Button>
-        </Card>
+        </Card> */}
       </center>
     </Card>
   );
 };
 
-export default LogoutModal;
+export default LoaderModal;
